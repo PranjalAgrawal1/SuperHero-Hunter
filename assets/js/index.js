@@ -89,12 +89,16 @@ async function fetchHero() {
 
     } else {
 
+        superHeroList.innerHTML = `<div id="loading"><img src="./assets/loading.gif" alt="loading....."><br>Loading......</div>`;
+
+        let tempList = "";
+
         for(let i = 0; i<16 ; i++){
             id = Math.floor(Math.random() * 731);
             let response = await fetch(url + id);
             // get response to json
             let sh = await response.json();
-            
+
             let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
 
             // if Superhero is present in Local Storage
@@ -102,7 +106,7 @@ async function fetchHero() {
                 likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
             }
 
-            superHeroList.innerHTML =
+            tempList =
                 `<div id="superhero-box">
                     <div id="superhero-image">
                         <a href="./sinfo.html?${sh.id}" target="_blank">
@@ -124,8 +128,10 @@ async function fetchHero() {
                         likeButton +
                         `<span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
                         </div>
-                </div>` + superHeroList.innerHTML
+                </div>` + tempList
         }
+
+        superHeroList.innerHTML = tempList;
     }   
 }
 

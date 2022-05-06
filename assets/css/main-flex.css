@@ -49,3 +49,9 @@ main {
 #superhero-image img{
     height: 100%;
 }
+
+
+#loading{
+    margin: auto;
+    text-align: center;
+}
