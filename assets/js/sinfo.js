@@ -12,7 +12,7 @@ async function fetchinfo() {
                 <div id="superhero-image">
                     <img src="${sh.image.url}" alt="superhero image">
                 </div>
-                <div>
+                <div id="info">
                     Id : ${sh.id}
                     <br>
                     Name : ${sh.name}
