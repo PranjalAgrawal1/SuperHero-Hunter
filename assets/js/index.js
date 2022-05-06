@@ -9,7 +9,7 @@ function addFav(superHeroID){
     let likeButton = document.getElementById(superHeroID);
 
     // change like button to dislike button
-    likeButton.innerHTML = `<span onclick="removeFav(${superHeroID})" id="${superHeroID}"><i class="fa-solid fa-heart-circle-xmark"></i></span>`
+    likeButton.innerHTML = `<span id="dislike" onclick="removeFav(${superHeroID})" ><i class="fa-solid fa-heart-circle-xmark"></i></span>`
 }
 
 // remove fav function
@@ -19,7 +19,7 @@ function removeFav(superHeroID){
     console.log("removed from fav : " +  localStorage.getItem(superHeroID));
     let likeButton = document.getElementById(superHeroID);
     //change dislike button to like button
-    likeButton.innerHTML = `<span onclick="addFav(${superHeroID})" id="${superHeroID}"><i class="fa-solid fa-heart-circle-check"></i></span>`
+    likeButton.innerHTML = `<span id="like-button" onclick="addFav(${superHeroID})" ><i class="fa-solid fa-heart-circle-check"></i></span>`
 
 }
 
@@ -55,11 +55,11 @@ async function fetchHero() {
         for (let sh of superHero) {
 
             // if Superhero is not present in Local Storage
-            let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+            let likeButton = `<span id="${sh.id}"><span id="like-button" onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
 
             // if Superhero is present in Local Storage
             if(localStorage.getItem(sh.id)){
-                likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+                likeButton = `<span id="${sh.id}"><span id="dislike" onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
             }
 
             superHeroList.innerHTML =
@@ -90,7 +90,6 @@ async function fetchHero() {
     } else {
 
         superHeroList.innerHTML = `<div id="loading"><img src="./assets/loading.gif" alt="loading....."><br>Loading......</div>`;
-
         let tempList = "";
 
         for(let i = 0; i<16 ; i++){
@@ -99,11 +98,11 @@ async function fetchHero() {
             // get response to json
             let sh = await response.json();
 
-            let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+            let likeButton = `<span id="${sh.id}"><span id="like-button" onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
 
             // if Superhero is present in Local Storage
             if(localStorage.getItem(sh.id)){
-                likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+                likeButton = `<span id="${sh.id}"><span id="dislike" onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
             }
 
             tempList =

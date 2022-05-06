@@ -9,6 +9,15 @@ async function fetchinfo() {
 
     // display superhero info
     let shBox = document.getElementById('display-superhero');
+
+
+    let likeButton = `<span id="${sh.id}"><span id="like-button" onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+
+    // if Superhero is present in Local Storage
+    if(localStorage.getItem(sh.id)){
+        likeButton = `<span id="${sh.id}"><span id="dislike" onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+    }
+
     shBox.innerHTML = `
             <div id="superhero-box">
                 <div id="superhero-image">
@@ -40,13 +49,10 @@ async function fetchinfo() {
                     Height : ${sh.appearance.height}
                     <br>
                     Weight : ${sh.appearance.weight}
-                    <br>
-
-                    <span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>
-                </div>
-            </div>
-        
-        `
+                    <br>` + 
+                    likeButton + 
+                `</div>
+            </div>`
 }
 
 

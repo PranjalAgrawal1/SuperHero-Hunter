@@ -25,7 +25,7 @@ async function fetchFavHero() {
                             Weight : ${sh.appearance.weight}
                             <br>
                         </a>
-                        <span id="${sh.id}"><span onclick="removeFav2(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>
+                        <span id="${sh.id}"><span id="dislike" onclick="removeFav2(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>
                         <span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
                         
                     </div>  

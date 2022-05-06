@@ -33,11 +33,18 @@ main {
 #superhero-box {
     margin: 20px;
     display: flex;
-    height: 100px;
+    height: 110px;
     width: 300px;
-}
-#superhero-box span{
+    background-color: rgb(93, 47, 47);
+    box-shadow: 0 0 10px black;
+    overflow: auto;
 
+}
+
+
+
+#superhero-box span{
+    
     font-size: 1.75rem;
 }
 
