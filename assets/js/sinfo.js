@@ -1,12 +1,14 @@
+
+// display SuperHero's Details
 async function fetchinfo() {
+    // fetch the SuperHero if via link 
     let id = window.location.search.substr(1);
-
     let response = await fetch(`https://superheroapi.com/api.php/3071624346492008/${id}`);
+    // convert to json
     let sh = await response.json();
-    console.log(sh);
 
+    // display superhero info
     let shBox = document.getElementById('display-superhero');
-
     shBox.innerHTML = `
             <div id="superhero-box">
                 <div id="superhero-image">

@@ -38,7 +38,9 @@ fetchFavHero();
 
 // remove the fav Super Hero from Fav page 
 function removeFav2(superHeroID){
+    // remove the super hero from local storage
     let shBox = document.getElementById('superhero-box-'+ superHeroID);
     localStorage.removeItem(superHeroID);
+    // remove the SuperHero div
     shBox.remove();
 }
