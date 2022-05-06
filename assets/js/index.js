@@ -37,12 +37,12 @@ async function fetchHero() {
             superHeroList.innerHTML =
             `<div id="superhero-box">
                 <div id="superhero-image">
-                    <a href="/sinfo.html?${sh.id}" target="_blank">
+                    <a href="./sinfo.html?${sh.id}" target="_blank">
                         <img src="${sh.image.url}" alt="superhero image">
                     </a>
                 </div>
                 <div>
-                    <a href="/sinfo.html?${sh.id}" target="_blank">
+                    <a href="./sinfo.html?${sh.id}" target="_blank">
 
                         Name : ${sh.name}
                         <br>
@@ -54,7 +54,7 @@ async function fetchHero() {
                         <br>
                     </a>
                     <span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>
-                    <span> <a href="/sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
+                    <span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
                     </div>
             </div>` + superHeroList.innerHTML
 
@@ -62,12 +62,12 @@ async function fetchHero() {
             superHeroList.innerHTML =
             `<div id="superhero-box">
                 <div id="superhero-image">
-                    <a href="/sinfo.html?${sh.id}" target="_blank">
+                    <a href="./sinfo.html?${sh.id}" target="_blank">
                         <img src="${sh.image.url}" alt="superhero image">
                     </a>
                 </div>
                 <div>
-                    <a href="/sinfo.html?${sh.id}" target="_blank">
+                    <a href="./sinfo.html?${sh.id}" target="_blank">
                         Name : ${sh.name}
                         <br>
                         Gender : ${sh.appearance.gender}
@@ -78,7 +78,7 @@ async function fetchHero() {
                         <br>
                     </a>
                     <span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>
-                    <span> <a href="/sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
+                    <span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
                     </div>
             </div>` + superHeroList.innerHTML
         }
