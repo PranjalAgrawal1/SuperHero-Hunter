@@ -27,57 +27,107 @@ function removeFav(superHeroID){
 async function fetchHero() {
     //get search input
     let name = document.getElementById('search-input').value;
-    //search via api
-    let response = await fetch(`https://superheroapi.com/api.php/3071624346492008/search/${name}`);
-    // get response to json
-    let resJson = await response.json();
-    let superHero = resJson.results;
-    // remove the previous searched element's div
+    let url = `https://superheroapi.com/api.php/3071624346492008/`
+
+
     let superHeroList = document.getElementById('display-superhero');
 
+    
+    // remove the previous searched element's div
     if (superHeroList.childElementCount != 0) {
-        let childs = superHeroList.childElementCount;
+        let childs = superHeroList.childElementCount;                
         for (let j = 0; j < childs; j++) {
             superHeroList.children[0].remove();
         }
     }
 
 
-    // send searched elements to display superhero flex 
-    for (let sh of superHero) {
+    // if name is empty display random Super Heros
 
-        // if Superhero is not present in Local Storage
-        let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+    if(name.length != 0){
+        //search via api
+        let response = await fetch(url + `search/${name}`);
+        // get response to json
+        let resJson = await response.json();
+        let superHero = resJson.results;
 
-        // if Superhero is present in Local Storage
-        if(localStorage.getItem(sh.id)){
-            likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+        // send searched elements to display superhero flex 
+        for (let sh of superHero) {
+
+            // if Superhero is not present in Local Storage
+            let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+
+            // if Superhero is present in Local Storage
+            if(localStorage.getItem(sh.id)){
+                likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+            }
+
+            superHeroList.innerHTML =
+                `<div id="superhero-box">
+                    <div id="superhero-image">
+                        <a href="./sinfo.html?${sh.id}" target="_blank">
+                            <img src="${sh.image.url}" alt="superhero image">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="./sinfo.html?${sh.id}" target="_blank">
+
+                            Name : ${sh.name}
+                            <br>
+                            Gender : ${sh.appearance.gender}
+                            <br>
+                            Height : ${sh.appearance.height}
+                            <br>
+                            Weight : ${sh.appearance.weight}
+                            <br>
+                        </a>` + 
+                        likeButton +
+                        `<span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
+                        </div>
+                </div>` + superHeroList.innerHTML
         }
 
-        superHeroList.innerHTML =
-            `<div id="superhero-box">
-                <div id="superhero-image">
-                    <a href="./sinfo.html?${sh.id}" target="_blank">
-                        <img src="${sh.image.url}" alt="superhero image">
-                    </a>
-                </div>
-                <div>
-                    <a href="./sinfo.html?${sh.id}" target="_blank">
+    } else {
 
-                        Name : ${sh.name}
-                        <br>
-                        Gender : ${sh.appearance.gender}
-                        <br>
-                        Height : ${sh.appearance.height}
-                        <br>
-                        Weight : ${sh.appearance.weight}
-                        <br>
-                    </a>` + 
-                    likeButton +
-                    `<span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
+        for(let i = 0; i<16 ; i++){
+            id = Math.floor(Math.random() * 731);
+            let response = await fetch(url + id);
+            // get response to json
+            let sh = await response.json();
+            
+            let likeButton = `<span id="${sh.id}"><span onclick="addFav(${sh.id})"><i class="fa-solid fa-heart-circle-check"></i></span> </span>`;
+
+            // if Superhero is present in Local Storage
+            if(localStorage.getItem(sh.id)){
+                likeButton = `<span id="${sh.id}"><span onclick="removeFav(${sh.id})" ><i class="fa-solid fa-heart-circle-xmark"></i></span> </span>`;
+            }
+
+            superHeroList.innerHTML =
+                `<div id="superhero-box">
+                    <div id="superhero-image">
+                        <a href="./sinfo.html?${sh.id}" target="_blank">
+                            <img src="${sh.image.url}" alt="superhero image">
+                        </a>
                     </div>
-            </div>` + superHeroList.innerHTML
-    }
+                    <div>
+                        <a href="./sinfo.html?${sh.id}" target="_blank">
+
+                            Name : ${sh.name}
+                            <br>
+                            Gender : ${sh.appearance.gender}
+                            <br>
+                            Height : ${sh.appearance.height}
+                            <br>
+                            Weight : ${sh.appearance.weight}
+                            <br>
+                        </a>` + 
+                        likeButton +
+                        `<span> <a href="./sinfo.html?${sh.id}" target="_blank"><i class="fa-solid fa-circle-info"></i></a> </span>
+                        </div>
+                </div>` + superHeroList.innerHTML
+        }
+    }   
 }
 
 
+fetchHero();
